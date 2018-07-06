@@ -7,9 +7,17 @@ File me [tickets](https://github.com/DennyZhang/cheatsheet-jq-a4/issues) or star
 
 See more CheatSheets from Denny: [here](https://github.com/topics/denny-cheatsheets)
 
+Table of Contents
+=================
+
+   * [cheatsheet-jq-a4](#cheatsheet-jq-a4)
+   * [jq basic usage](#jq-basic-usage)
+   * [jq with watch](#jq-with-watch)
+   * [More links](#more-links)
+
 <a href="https://www.dennyzhang.com"><img align="right" width="185" height="37" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/dns_small.png"></a>
 
-- jq
+# jq basic usage
 
 ```
 curl $es_ip:9200/$index_name/_stats?pretty | less
@@ -29,7 +37,7 @@ curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries.docs[], ._all.p
 curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries[]' | jq '.docs'
 ```
 
-- jq with watch
+# jq with watch
 
 ```
 watch -n 0.5 "kubectl get configmaps map1 -o json | jq '.data[\"file1.conf\"]'"
