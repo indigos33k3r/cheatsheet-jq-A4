@@ -9,11 +9,6 @@ See more CheatSheets from Denny: [here](https://github.com/topics/denny-cheatshe
 
 <a href="https://www.dennyzhang.com"><img align="right" width="185" height="37" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/dns_small.png"></a>
 
-- jq with watch
-```
-watch -n 0.5 "kubectl get configmaps map1 -o json | jq '.data[\"file1.conf\"]'"
-```
-
 - jq
 
 ```
@@ -32,6 +27,12 @@ curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries.docs[]'
 curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries.docs[], ._all.primaries.segments[]'
 
 curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries[]' | jq '.docs'
+```
+
+- jq with watch
+
+```
+watch -n 0.5 "kubectl get configmaps map1 -o json | jq '.data[\"file1.conf\"]'"
 ```
 
 # More links
