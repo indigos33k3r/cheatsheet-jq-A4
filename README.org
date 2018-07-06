@@ -1,0 +1,28 @@
+-*- mode:org; fill-column:70; coding:utf-8; -*-
+* jq is a lightweight and flexible command-line JSON processor.
+https://stedolan.github.io/jq/
+https://stedolan.github.io/jq/tutorial/
+** DONE ubuntu14.04 install jq 1.5
+  CLOSED: [2017-03-31 Fri 11:01]
+http://stackoverflow.com/questions/36462955/upgrading-jq-to-1-5-on-ubuntu
+
+cd /tmp
+wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
+chmod +x jq-linux64
+sudo cp jq-linux64 /usr/bin/jq
+jq --version
+** DONE grep for jq output: curl -s https://api.github.com/users/octocat/repos | jq '.' | cat
+  CLOSED: [2017-08-20 Sun 17:06]
+https://stackoverflow.com/questions/33247228/how-to-use-jq-in-a-shell-pipeline
+curl -XGET --unix-socket /var/run/docker.sock http://localhost/containers/json | jq '.' | grep Status
+
+** TODO [#A] jq print multiple fields
+curl -XGET --unix-socket /var/run/docker.sock http://localhost/containers/json | jq '.[].Names[], .[].Status'
+#+BEGIN_EXAMPLE
+Detail: "/healthcheck-slack"
+"/nginx"
+"Up 25 seconds (health: starting)"
+"Up About an hour (unhealthy)"
+#+END_EXAMPLE
+
+

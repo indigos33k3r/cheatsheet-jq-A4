@@ -7,19 +7,32 @@ File me [tickets](https://github.com/DennyZhang/cheatsheet-jq-a4/issues) or star
 
 See more CheatSheets from Denny: [here](https://github.com/topics/denny-cheatsheets)
 
-Table of Contents
-=================
-
-   * [cheatsheet-jq-a4](#cheatsheet-jq-a4)
-      * [List](#list)
-
 <a href="https://www.dennyzhang.com"><img align="right" width="185" height="37" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/dns_small.png"></a>
 
-## jq Compact Coding
+- jq with watch
+```
+watch -n 0.5 "kubectl get configmaps map1 -o json | jq '.data[\"file1.conf\"]'"
+```
 
-| Name                          | Comment                                                 |
-| :---------------------------- | -----------------------------------------               |
-| if ... return                 | `if k == 0: return False`                               |
+- jq
+
+```
+curl $es_ip:9200/$index_name/_stats?pretty | less
+
+curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries'
+
+curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries | .docs, .merges, .segments'
+
+watch "curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries | .docs, .merges, .segments'"
+
+curl $es_ip:9200/$index_name/_stats?pretty | jq '.[0] | ._all: promaries}'
+
+curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries.docs[]'
+
+curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries.docs[], ._all.primaries.segments[]'
+
+curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries[]' | jq '.docs'
+```
 
 # More links
 
