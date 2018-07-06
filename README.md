@@ -20,13 +20,9 @@ Table of Contents
 # jq basic usage
 
 ```
-curl $es_ip:9200/$index_name/_stats?pretty | less
-
 curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries'
 
 curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries | .docs, .merges, .segments'
-
-watch "curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries | .docs, .merges, .segments'"
 
 curl $es_ip:9200/$index_name/_stats?pretty | jq '.[0] | ._all: promaries}'
 
@@ -41,6 +37,8 @@ curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries[]' | jq '.docs'
 
 ```
 watch -n 0.5 "kubectl get configmaps map1 -o json | jq '.data[\"file1.conf\"]'"
+
+watch "curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries | .docs, .merges, .segments'"
 ```
 
 # More links
