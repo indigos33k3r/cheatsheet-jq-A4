@@ -44,7 +44,7 @@ curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries[]' | jq '.docs'
 #+END_SRC
 
 ** jq with watch
-#+BEGIN_SRC bash
+#+BEGIN_SRC sh
 watch -n 0.5 "kubectl get configmaps map1 -o json | jq '.data[\"file1.conf\"]'"
 
 watch "curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries | .docs, .merges, .segments'"
