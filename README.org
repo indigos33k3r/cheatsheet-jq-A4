@@ -25,9 +25,9 @@
 <a href="http://makeapullrequest.com" target="_blank" rel="nofollow"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"/></a>
 #+END_HTML
 
-File me [[https://jqhub.com/DennyZhang/cheatsheet-jq-A4/issues][Issues]] or star [[https://jqhub.com/DennyZhang/cheatsheet-jq-A4][this repo]].
+File me [[https://github.com/DennyZhang/cheatsheet-jq-A4/issues][Issues]] or star [[https://github.com/DennyZhang/cheatsheet-jq-A4][this repo]].
 
-See more CheatSheets from Denny: [[https://jqhub.com/topics/denny-cheatsheets][#denny-cheatsheets]]
+See more CheatSheets from Denny: [[https://github.com/topics/denny-cheatsheets][#denny-cheatsheets]]
 ** jq basic usage
 #+BEGIN_SRC sh
 curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries'
