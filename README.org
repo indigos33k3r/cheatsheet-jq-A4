@@ -98,3 +98,15 @@ Detail: "/healthcheck-slack"
              --output=json \
              --namespace blackbox-tests \
              | jq --join-output .status.phase
+* [#B] kubectl jsonpath support                                    :noexport:
+https://kubernetes.io/docs/reference/kubectl/jsonpath/
+
+kubectl get pods -o json
+$ kubectl get pods -o=jsonpath='{@}'
+$ kubectl get pods -o=jsonpath='{.items[0]}'
+$ kubectl get pods -o=jsonpath='{.items[0].metadata.name}'
+$ kubectl get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.startTime}{"\n"}{end}'
+
+kubectl get pods -o=jsonpath='{.items[0].metadata.name}'
+
+kubectl get pods -n oratos -o=jsonpath='{range .items[*]}{.metadata.name}:{.spec.containers[0].name}{"\t"}{.spec.containers[0].image}{"\n"}{end}'
