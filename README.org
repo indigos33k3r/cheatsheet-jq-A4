@@ -16,9 +16,8 @@
 <a href="http://makeapullrequest.com" target="_blank" rel="nofollow"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"/></a>
 #+END_HTML
 
-- PDF Link: [[https://github.com/dennyzhang/cheatsheet-jq-A4/blob/master/cheatsheet-jq-A4.pdf][cheatsheet-jq-A4.pdf]]
+- PDF Link: [[https://github.com/dennyzhang/cheatsheet-jq-A4/blob/master/cheatsheet-jq-A4.pdf][cheatsheet-jq-A4.pdf]], Category: [[https://cheatsheet.dennyzhang.com/category/tools/][tools]]
 - Blog URL: https://cheatsheet.dennyzhang.com/cheatsheet-jq-A4
-- Category: [[https://cheatsheet.dennyzhang.com/category/tools/][tools]]
 
 File me [[https://github.com/dennyzhang/cheatsheet-jq-A4/issues][Issues]] or star [[https://github.com/DennyZhang/cheatsheet-jq-A4][this repo]].
 
