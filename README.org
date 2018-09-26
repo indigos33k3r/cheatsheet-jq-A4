@@ -5,7 +5,7 @@
 :END:
 
 #+BEGIN_HTML
-<a href="https://github.com/dennyzhang/cheatsheet-jq-A4"><img align="right" width="200" height="183" src="https://www.dennyzhang.com/wp-content/uploads/denny/watermark/github.png" /></a>
+<a href="https://github.com/dennyzhang/.*cheatsheet-jq-A4"><img align="right" width="200" height="183" src="https://www.dennyzhang.com/wp-content/uploads/denny/watermark/github.png" /></a>
 <div id="the whole thing" style="overflow: hidden;">
 <div style="float: left; padding: 5px"> <a href="https://www.linkedin.com/in/dennyzhang001"><img src="https://www.dennyzhang.com/wp-content/uploads/sns/linkedin.png" alt="linkedin" /></a></div>
 <div style="float: left; padding: 5px"><a href="https://github.com/dennyzhang"><img src="https://www.dennyzhang.com/wp-content/uploads/sns/github.png" alt="github" /></a></div>
@@ -123,3 +123,18 @@ $ kubectl get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.
 kubectl get pods -o=jsonpath='{.items[0].metadata.name}'
 
 kubectl get pods -n oratos -o=jsonpath='{range .items[*]}{.metadata.name}:{.spec.containers[0].name}{"\t"}{.spec.containers[0].image}{"\n"}{end}'
+* more content                                                     :noexport:
+** jq
+# Pretty print the json
+jq "." < filename.json
+
+# Access the value at key "foo"
+jq '.foo'
+
+# Access first list item
+jq '.[0]'
+
+# Slice & Dice
+jq '.[2:4]'
+jq '.[:3]'
+jq '.[-2:]'
