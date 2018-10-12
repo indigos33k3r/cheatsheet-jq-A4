@@ -36,12 +36,19 @@ curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries.docs[], ._all.p
 
 curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries[]' | jq '.docs'
 #+END_SRC
-
 ** jq with watch
 #+BEGIN_SRC sh
 watch -n 0.5 "kubectl get configmaps map1 -o json | jq '.data[\"file1.conf\"]'"
 
 watch "curl $es_ip:9200/$index_name/_stats?pretty | jq '._all.primaries | .docs, .merges, .segments'"
+#+END_SRC
+** k8s jq
+#+BEGIN_SRC sh
+# List pods and containers
+kubectl get pods -o='custom-columns=PODS:.metadata.name,CONTAINERS:.spec.containers[*].name'
+
+# List pods, containers and images
+kubectl get pods -o='custom-columns=PODS:.metadata.name,CONTAINERS:.spec.containers[*].name,Images:.spec.containers[*].image'
 #+END_SRC
 ** More Resources
 License: Code is licensed under [[https://www.dennyzhang.com/wp-content/mit_license.txt][MIT License]].
@@ -55,8 +62,8 @@ License: Code is licensed under [[https://www.dennyzhang.com/wp-content/mit_lice
 #+END_HTML
 * org-mode configuration                                           :noexport:
 #+STARTUP: overview customtime noalign logdone showall
-#+DESCRIPTION: 
-#+KEYWORDS: 
+#+DESCRIPTION:
+#+KEYWORDS:
 #+LATEX_HEADER: \usepackage[margin=0.6in]{geometry}
 #+LaTeX_CLASS_OPTIONS: [8pt]
 #+LATEX_HEADER: \usepackage[english]{babel}
@@ -76,9 +83,8 @@ License: Code is licensed under [[https://www.dennyzhang.com/wp-content/mit_lice
 #+OPTIONS:   TeX:t LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+EXPORT_EXCLUDE_TAGS: exclude noexport
 #+SEQ_TODO: TODO HALF ASSIGN | DONE BYPASS DELEGATE CANCELED DEFERRED
-#+LINK_UP:   
-#+LINK_HOME: 
-
+#+LINK_UP:
+#+LINK_HOME:
 * jq is a lightweight and flexible command-line JSON processor.    :noexport:
 https://stedolan.github.io/jq/
 https://stedolan.github.io/jq/tutorial/
@@ -95,7 +101,6 @@ jq --version
   CLOSED: [2017-08-20 Sun 17:06]
 https://stackoverflow.com/questions/33247228/how-to-use-jq-in-a-shell-pipeline
 curl -XGET --unix-socket /var/run/docker.sock http://localhost/containers/json | jq '.' | grep Status
-
 ** TODO [#A] jq print multiple fields
 curl -XGET --unix-socket /var/run/docker.sock http://localhost/containers/json | jq '.[].Names[], .[].Status'
 #+BEGIN_EXAMPLE
