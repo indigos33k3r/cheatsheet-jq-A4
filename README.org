@@ -143,3 +143,65 @@ jq '.[0]'
 jq '.[2:4]'
 jq '.[:3]'
 jq '.[-2:]'
+* TODO save jq output to text file                                 :noexport:
+time curl -k -XGET "https://localhost/api/v1/admin/tenantsAdmin/" \
+     -H "Authorization: $token" | jq
+* #  --8<-------------------------- separator ------------------------>8-- :noexport:
+* TODO jq get the last one of the list                             :noexport:
+* TODO jq -r                                                       :noexport:
+* TODO jq select the last element                                  :noexport:
+https://github.com/stedolan/jq/issues/509
+#+BEGIN_EXAMPLE
+https://oratos.ci.cf-app.com/teams/main/pipelines/namespace-drain/jobs/update-bosh-release/builds/42
+
+root@145abaff-d8b7-41a3-75f0-3c98e57e585e:/tmp/build/f8b8f357/put-sink-resources-release# yq r releases/sink-resources-release/index.yml --tojson | jq -r ".builds[].[-1].version"
+jq: error: syntax error, unexpected '[', expecting FORMAT or QQSTRING_START (Unix shell quoting issues?) at <top-level>, line 1:
+.builds[].[-1].version
+jq: 1 compile error
+root@145abaff-d8b7-41a3-75f0-3c98e57e585e:/tmp/build/f8b8f357/put-sink-resources-release# yq r releases/sink-resources-release/index.yml --tojson | jq -r ".builds.[1].version"
+jq: error: syntax error, unexpected '[', expecting FORMAT or QQSTRING_START (Unix shell quoting issues?) at <top-level>, line 1:
+.builds.[1].version
+jq: 1 compile error
+root@145abaff-d8b7-41a3-75f0-3c98e57e585e:/tmp/build/f8b8f357/put-sink-resources-release# yq r releases/sink-resources-release/index.yml --tojson | jq -r ".builds.[-1].version"
+jq: error: syntax error, unexpected '[', expecting FORMAT or QQSTRING_START (Unix shell quoting issues?) at <top-level>, line 1:
+.builds.[-1].version
+jq: 1 compile error
+root@145abaff-d8b7-41a3-75f0-3c98e57e585e:/tmp/build/f8b8f357/put-sink-resources-release# yq r releases/sink-resources-release/index.yml --tojson
+{"builds":{"bdd412b7-b364-4d5d-44b5-c9138aa58fe7":{"version":"v0.1"},"be9f0b9b-ae82-4efa-423a-9f4c775c29bd":{"version":"v0.2"}},"format-version":"2"}
+root@145abaff-d8b7-41a3-75f0-3c98e57e585e:/tmp/build/f8b8f357/put-sink-resources-release# yq r releases/sink-resources-release/index.yml --tojson | jq -r ".builds.version"
+null
+root@145abaff-d8b7-41a3-75f0-3c98e57e585e:/tmp/build/f8b8f357/put-sink-resources-release# yq r releases/sink-resources-release/index.yml --tojson | jq -r ".builds[].version"
+v0.1
+v0.2
+root@145abaff-d8b7-41a3-75f0-3c98e57e585e:/tmp/build/f8b8f357/put-sink-resources-release# yq r releases/sink-resources-release/index.yml --tojson | jq -r ".builds[].version" | tail -n1
+v0.2
+root@145abaff-d8b7-41a3-75f0-3c98e57e585e:/tmp/build/f8b8f357/put-sink-resources-release# yq r releases/sink-resources-release/index.yml --tojson | jq -r ".builds[].version[0]"
+jq: error (at <stdin>:1): Cannot index string with number
+root@145abaff-d8b7-41a3-75f0-3c98e57e585e:/tmp/build/f8b8f357/put-sink-resources-release# yq r releases/sink-resources-release/index.yml --tojson | jq -r ".builds[].version"
+v0.1
+v0.2
+#+END_EXAMPLE
+
+* TODO jq usage                                                    :noexport:
+#+BEGIN_EXAMPLE
+`curl "http://bematech-do-es-1:9200/_nodes/stats/indices/search" | jq '[ .nodes[] ] | sort_by(.indices.search.scroll_current) | [ .[] | { name: .name, scrolls: .indices.search.scroll_current } ]`
+
+
+[1:44]
+ ```  {
+    "name": "bematech-do-es-18.localdomain",
+    "scrolls": 134
+  },
+  {
+    "name": "bematech-do-es-08.localdomain",
+    "scrolls": 148
+  },
+  {
+    "name": "bematech-do-es-07.localdomain",
+    "scrolls": 187
+  },
+  {
+    "name": "bematech-do-es-01.localdomain",
+    "scrolls": 269
+  }```
+#+END_EXAMPLE
